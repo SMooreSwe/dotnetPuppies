@@ -1,4 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<MvcPuppyContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MvcPuppyContext") ?? throw new InvalidOperationException("Connection string 'MvcPuppyContext' not found.")));
 
 // Add services to the container.
 
