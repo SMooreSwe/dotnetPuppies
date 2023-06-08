@@ -90,6 +90,7 @@ namespace puppiesAPI.Controllers
           }
             var result = new Puppy
             {
+                Id = puppy.Id,
                 Name = puppy.Name,
                 Breed = puppy.Breed,
                 BirthDate = puppy.BirthDate,
