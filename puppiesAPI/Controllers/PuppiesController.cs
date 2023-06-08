@@ -51,7 +51,7 @@ namespace puppiesAPI.Controllers
         // PUT: api/Puppies/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPuppy(string id, AddPuppyDTO puppy)
+        public async Task<IActionResult> PutPuppy(string id, Puppy puppy)
         {
             if (id != puppy.Id)
             {
