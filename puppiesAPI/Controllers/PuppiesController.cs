@@ -32,7 +32,7 @@ namespace puppiesAPI.Controllers
 
         // GET: api/Puppies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Puppy>> GetPuppy(int id)
+        public async Task<ActionResult<Puppy>> GetPuppy(string id)
         {
           if (_context.Puppy == null)
           {
@@ -51,7 +51,7 @@ namespace puppiesAPI.Controllers
         // PUT: api/Puppies/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPuppy(int id, AddPuppyDTO puppy)
+        public async Task<IActionResult> PutPuppy(string id, AddPuppyDTO puppy)
         {
             if (id != puppy.Id)
             {
@@ -102,7 +102,7 @@ namespace puppiesAPI.Controllers
 
         // DELETE: api/Puppies/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePuppy(int id)
+        public async Task<IActionResult> DeletePuppy(string id)
         {
             if (_context.Puppy == null)
             {
@@ -120,7 +120,7 @@ namespace puppiesAPI.Controllers
             return NoContent();
         }
 
-        private bool PuppyExists(int id)
+        private bool PuppyExists(string id)
         {
             return (_context.Puppy?.Any(e => e.Id == id)).GetValueOrDefault();
         }

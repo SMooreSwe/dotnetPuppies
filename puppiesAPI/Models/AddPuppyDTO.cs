@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 public class AddPuppyDTO
 {
-    public int Id { get; set; }
+    public string Id { get; set; } = Guid.NewGuid().ToString();
     [Required]
     public string? Name { get; set; }
     [Required]
