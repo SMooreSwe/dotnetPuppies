@@ -53,10 +53,10 @@ namespace puppiesAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPuppy(string id, Puppy puppy)
         {
-            if (id != puppy.Id)
-            {
-                return BadRequest();
-            }
+             if (!PuppyExists(id))
+                {
+                    return NotFound();
+                }
 
             _context.Entry(puppy).State = EntityState.Modified;
 
@@ -66,14 +66,7 @@ namespace puppiesAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PuppyExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return StatusCode(409);
             }
 
             return NoContent();
