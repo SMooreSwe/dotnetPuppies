@@ -21,7 +21,7 @@ namespace puppiesAPI.Controllers
 
         // GET: api/Puppies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Puppy>>> GetPuppy()
+        public async Task<ActionResult<IEnumerable<Puppy>>> GetPuppies()
         {
           if (_context.Puppy == null)
           {
@@ -51,7 +51,7 @@ namespace puppiesAPI.Controllers
         // PUT: api/Puppies/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPuppy(int id, Puppy puppy)
+        public async Task<IActionResult> PutPuppy(int id, AddPuppyDTO puppy)
         {
             if (id != puppy.Id)
             {
@@ -82,16 +82,22 @@ namespace puppiesAPI.Controllers
         // POST: api/Puppies
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Puppy>> PostPuppy(Puppy puppy)
+        public async Task<ActionResult<Puppy>> PostPuppy(AddPuppyDTO puppy)
         {
           if (_context.Puppy == null)
           {
               return Problem("Entity set 'MvcPuppyContext.Puppy'  is null.");
           }
-            _context.Puppy.Add(puppy);
+            var result = new Puppy
+            {
+                Name = puppy.Name,
+                Breed = puppy.Breed,
+                BirthDate = puppy.BirthDate,
+            };
+            var newPuppy = _context.Puppy.Add(result);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPuppy", new { id = puppy.Id }, puppy);
+            return CreatedAtAction(nameof(GetPuppy), new { id = result.Id }, result);
         }
 
         // DELETE: api/Puppies/5
